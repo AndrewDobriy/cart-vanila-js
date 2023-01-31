@@ -3,6 +3,7 @@
   <head>
     <title>The Generics | Store</title>
     <meta name="description" content="This is the description" />
+
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -19,71 +20,35 @@
     <section class="container content-section">
       <h2 class="section-header">MUSIC</h2>
       <div class="shop-items">
-        <div class="shop-item">
-          <span class="shop-item-title">Album 1</span>
-          <img class="shop-item-image" src="Images/Album 1.png" />
+        <% item.music.forEach(function(item) { %>
+        <div class="shop-item" data-item-id="<%item.id %>">
+          <span class="shop-item-title"><%= item.name %></span>
+          <img class="shop-item-image" src="Images/<%= item.imgName %>" />
           <div class="shop-item-details">
-            <span class="shop-item-price">$12.99</span>
+            <span class="shop-item-price">$<%= item.price / 100%></span>
             <button class="btn btn-primary shop-item-button" type="button">
               ADD TO CART
             </button>
           </div>
         </div>
-        <div class="shop-item">
-          <span class="shop-item-title">Album 2</span>
-          <img class="shop-item-image" src="Images/Album 2.png" />
-          <div class="shop-item-details">
-            <span class="shop-item-price">$14.99</span>
-            <button class="btn btn-primary shop-item-button" type="button">
-              ADD TO CART
-            </button>
-          </div>
-        </div>
-        <div class="shop-item">
-          <span class="shop-item-title">Album 3</span>
-          <img class="shop-item-image" src="Images/Album 3.png" />
-          <div class="shop-item-details">
-            <span class="shop-item-price">$9.99</span>
-            <button class="btn btn-primary shop-item-button" type="button">
-              ADD TO CART
-            </button>
-          </div>
-        </div>
-        <div class="shop-item">
-          <span class="shop-item-title">Album 4</span>
-          <img class="shop-item-image" src="Images/Album 4.png" />
-          <div class="shop-item-details">
-            <span class="shop-item-price">$19.99</span>
-            <button class="btn btn-primary shop-item-button" type="button">
-              ADD TO CART
-            </button>
-          </div>
-        </div>
+        <% }) %>
       </div>
     </section>
     <section class="container content-section">
       <h2 class="section-header">MERCH</h2>
       <div class="shop-items">
-        <div class="shop-item">
-          <span class="shop-item-title">T-Shirt</span>
-          <img class="shop-item-image" src="Images/Shirt.png" />
+        <% item.merch.forEach(function(item) { %>
+        <div class="shop-item" data-item-id="<%item.id %>">
+          <span class="shop-item-title"><%= item.name %></span>
+          <img class="shop-item-image" src="Images/<%= item.imgName %>" />
           <div class="shop-item-details">
-            <span class="shop-item-price">$19.99</span>
+            <span class="shop-item-price">$<%= item.price / 100%></span>
             <button class="btn btn-primary shop-item-button" type="button">
               ADD TO CART
             </button>
           </div>
         </div>
-        <div class="shop-item">
-          <span class="shop-item-title">Coffee Cup</span>
-          <img class="shop-item-image" src="Images/Cofee.png" />
-          <div class="shop-item-details">
-            <span class="shop-item-price">$6.99</span>
-            <button class="btn btn-primary shop-item-button" type="button">
-              ADD TO CART
-            </button>
-          </div>
-        </div>
+        <% }) %>
       </div>
     </section>
     <section class="container content-section">
@@ -125,6 +90,10 @@
         </ul>
       </div>
     </footer>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script>
+      let stripePublicKey = '<%= stripePublicKey %>';
+    </script>
     <script src="store.js"></script>
   </body>
 </html>

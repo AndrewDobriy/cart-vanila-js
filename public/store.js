@@ -20,15 +20,24 @@ document
   .querySelectorAll('.btn-purchase')[0]
   .addEventListener('click', purchaseClicked);
 
+let stripeHandler = StripeCheckout.configure({
+  key: stripePublicKey,
+  locale: 'en',
+  token: function (token) {},
+});
+
 function purchaseClicked() {
-  alert('Thank you for your purchase');
-
-  let carItems = document.getElementsByClassName('cart-items')[0];
-
-  while (carItems.hasChildNodes()) {
-    carItems.removeChild(carItems.firstChild);
-  }
-  updateCartTotal();
+  // alert('Thank you for your purchase');
+  // let carItems = document.getElementsByClassName('cart-items')[0];
+  // while (carItems.hasChildNodes()) {
+  //   carItems.removeChild(carItems.firstChild);
+  // }
+  // updateCartTotal();
+  let priceElement = document.getElementsByClassName('cart-total-price')[0];
+  let price = parseFloat(priceElement.innerText.replace('$', '')) * 100;
+  stripeHandler.open({
+    amount: price,
+  });
 }
 
 function addToCartClicked(event) {
